@@ -38,4 +38,5 @@ print("\(student1) and \(student2) are in the class.")
 //use nested tuples instead
 
 var students1 = (
-    (firstname: "Duane", lastname: "Soisson", )
+    (firstname: "Duane", lastname: "Soisson")
+)
