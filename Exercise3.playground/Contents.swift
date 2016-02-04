@@ -8,3 +8,33 @@
 * Use a loop statement
 */
 
+/*:
+**The encryption can also be represented using modular arithmetic by first transforming the letters into numbers, according to the scheme, A = 0, B = 1,..., Z = 25.[1] 
+
+Encryption of a letter x by a shift n can be described mathematically as
+E_n(x) = (x + n) \mod {26}.
+
+Decryption is performed similarly,
+D_n(x) = (x - n) \mod {26}.
+
+(There are different definitions for the modulo operation. In the above, the result is in the range 0...25. I.e., if x+n or x-n are not in the range 0...25, we have to subtract or add 26.)
+*/
+
+import Foundation
+
+var alphabet = (
+    (letter: "a", number: 0),
+    (letter: "b", number: 1),
+    (letter: "c", number: 2),
+    (letter: "d", number: 3))
+
+var a = 0
+var b = 1
+var c = 2
+
+var message = "abc is cba"
+var shift = 2
+
+for i in message.characters {
+    print(i)
+}
