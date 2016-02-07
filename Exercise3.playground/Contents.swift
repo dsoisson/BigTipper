@@ -175,15 +175,18 @@ var shift = 13
 
 var newAlpha = test.2.alphabet
 var newMessage = ""
-print([newAlpha.startIndex])
+var range = newAlpha.startIndex.advancedBy(1)...newAlpha.startIndex.advancedBy(1)
+var substring = newAlpha[range]
 
 
-for i in message.characters {
-    switch i {
-        case "a":
-            newMessage.append(test.2.alphabet.startIndex)
-}
-)
+
+
+//for i in message.characters {
+//    switch i {
+// case "a":
+        
+//}
+//)
 
 
 
