@@ -22,6 +22,11 @@ D_n(x) = (x - n) \mod {26}.
 
 import Foundation
 
+/*: 
+*Try using nested tuples
+*/
+
+
 //var alphabet = (
 //    (letter: "a", number: 0),
 //    (letter: "b", number: 1),
@@ -30,124 +35,172 @@ import Foundation
 
 //var test = ("a", "b", "c", "d")
 
-enum Alphabet: Int {
-    case A = 0, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
-}
+/*: 
+Try using enumeration
+*/
+
+//enum Alphabet: Int {
+//    case A = 0, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+//}
+
+//var message = "Abe Lincoln"
+//var shift = 13
+//var secretMessage = ""
+
+
+//for i in message.lowercaseString.characters {
+//    switch i {
+//    case "a":
+//            var secretLetter = (Alphabet(rawValue: (Alphabet.A.rawValue + shift)%26))
+//            print(secretLetter!)
+//        
+//    case "b":
+//            var secretLetter = (Alphabet(rawValue: (Alphabet.B.rawValue + shift)%26))
+//            print(secretLetter!)
+//        
+//    case "c":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.C.rawValue + shift)%26))
+//        print(secretLetter!)
+//        
+//    case "d":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.D.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "e":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.E.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "f":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.F.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "g":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.G.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "h":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.H.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "i":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.I.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "j":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.J.rawValue + shift)%26))
+//        print(secretLetter!)
+//    
+//    case "k":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.K.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "l":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.L.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "m":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.M.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "n":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.N.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "o":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.O.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "p":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.P.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "q":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.Q.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "r":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.R.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "s":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.S.rawValue + shift)%26))
+//        print(secretLetter!)
+//        
+//    case "t":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.T.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "u":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.U.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "v":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.V.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "w":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.W.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "x":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.X.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "y":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.Y.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    case "z":
+//        var secretLetter = (Alphabet(rawValue: (Alphabet.Z.rawValue + shift)%26))
+//        print(secretLetter!)
+//
+//    default: print(i)
+//    }
+//}
+//
+
+/*:
+Try using plain tuples
+*/
+
+var test = (
+    (loc: 0, alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+    (loc: 1, alphabet: "BCDEFGHIJKLMNOPQRSTUVWXYZA"),
+    (loc: 2, alphabet: "CDEFGHIJKLMNOPQRSTUVWXYZAB")
+)
 
 var message = "Abe Lincoln"
+
 var shift = 13
-var secretMessage = ""
+
+var newAlpha = test.2.alphabet
+var newMessage = ""
+print([newAlpha.startIndex])
 
 
-for i in message.lowercaseString.characters {
+for i in message.characters {
     switch i {
-    case "a":
-            var secretLetter = (Alphabet(rawValue: (Alphabet.A.rawValue + shift)%26))
-            print(secretLetter!)
-        
-    case "b":
-            var secretLetter = (Alphabet(rawValue: (Alphabet.B.rawValue + shift)%26))
-            print(secretLetter!)
-        
-    case "c":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.C.rawValue + shift)%26))
-        print(secretLetter!)
-        
-    case "d":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.D.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "e":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.E.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "f":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.F.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "g":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.G.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "h":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.H.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "i":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.I.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "j":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.J.rawValue + shift)%26))
-        print(secretLetter!)
-    
-    case "k":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.K.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "l":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.L.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "m":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.M.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "n":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.N.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "o":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.O.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "p":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.P.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "q":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.Q.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "r":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.R.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "s":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.S.rawValue + shift)%26))
-        print(secretLetter!)
-        
-    case "t":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.T.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "u":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.U.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "v":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.V.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "w":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.W.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "x":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.X.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "y":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.Y.rawValue + shift)%26))
-        print(secretLetter!)
-
-    case "z":
-        var secretLetter = (Alphabet(rawValue: (Alphabet.Z.rawValue + shift)%26))
-        print(secretLetter!)
-
-    default: print(i)
-    }
+        case "a":
+            newMessage.append(test.2.alphabet.startIndex)
 }
+)
+
+
+
+if test.0.loc == Int(shift) {
+    print("worked")
+}
+
+
+print(shift)
+var secretMessage = ""
+var newKey = test.0
+print(newKey)
+
+//var foo: (x: Int) = 42
+//println(foo.x)
+
+
 
 
 
