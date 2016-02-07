@@ -166,25 +166,78 @@ Try using plain tuples
 var test = (
     (loc: 0, alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
     (loc: 1, alphabet: "BCDEFGHIJKLMNOPQRSTUVWXYZA"),
-    (loc: 2, alphabet: "CDEFGHIJKLMNOPQRSTUVWXYZAB")
+    (loc: 2, alphabet: "CDEFGHIJKLMNOPQRSTUVWXYZAB"),
+    (loc: 3, alphabet: "DEFGHIJKLMNOPQRSTUVWXYZABC"),
+    (loc: 4, alphabet: "EFGHIJKLMNOPQRSTUVWXYZABCD"),
+    (loc: 5, alphabet: "FGHIJKLMNOPQRSTUVWXYZABCDE"),
+    (loc: 6, alphabet: "GHIJKLMNOPQRSTUVWXYZABCDEF"),
+    (loc: 7, alphabet: "HIJKLMNOPQRSTUVWXYZABCDEFG"),
+    (loc: 8, alphabet: "IJKLMNOPQRSTUVWXYZABCDEFGH"),
+    (loc: 9, alphabet: "JKLMNOPQRSTUVWXYZABCDEFGHI"),
+    (loc: 10, alphabet: "KLMNOPQRSTUVWXYZABCDEFGHIJ"),
+    (loc: 11, alphabet: "LMNOPQRSTUVWXYZABCDEFGHIJK"),
+    (loc: 12, alphabet: "MNOPQRSTUVWXYZABCDEFGHIJKL"),
+    (loc: 13, alphabet: "NOPQRSTUVWXYZABCDEFGHIJKLM"),
+    (loc: 14, alphabet: "OPQRSTUVWXYZABCDEFGHIJKLMN"),
+    (loc: 15, alphabet: "PQRSTUVWXYZABCDEFGHIJKLMNO"),
+    (loc: 16, alphabet: "QRSTUVWXYZABCDEFGHIJKLMNOP"),
+    (loc: 17, alphabet: "RSTUVWXYZABCDEFGHIJKLMNOPQ"),
+    (loc: 18, alphabet: "STUVWXYZABCDEFGHIJKLMNOPQR"),
+    (loc: 19, alphabet: "TUVWXYZABCDEFGHIJKLMNOPQRS"),
+    (loc: 20, alphabet: "UVWXYZABCDEFGHIJKLMNOPQRST"),
+    (loc: 21, alphabet: "VWXYZABCDEFGHIJKLMNOPQRSTU"),
+    (loc: 22, alphabet: "WXYZABCDEFGHIJKLMNOPQRSTUV"),
+    (loc: 23, alphabet: "XYZABCDEFGHIJKLMNOPQRSTUVW"),
+    (loc: 24, alphabet: "YZABCDEFGHIJKLMNOPQRSTUVWX"),
+    (loc: 25, alphabet: "ZABCDEFGHIJKLMNOPQRSTUVWXY")
 )
 
 var message = "Abe Lincoln"
-
-var shift = 13
-
-var newAlpha = test.2.alphabet
+var shift = 7
+var newAlpha = test.7.alphabet
 var newMessage = ""
-var range = newAlpha.startIndex.advancedBy(1)...newAlpha.startIndex.advancedBy(1)
-var substring = newAlpha[range]
+
+for i in message.lowercaseString.characters {
+    switch i {
+    case "a":
+        var range = newAlpha.startIndex.advancedBy(0)...newAlpha.startIndex.advancedBy(0)
+        var substring = newAlpha[range]
+        newMessage += substring
+    
+    case "b":
+        var range = newAlpha.startIndex.advancedBy(1)...newAlpha.startIndex.advancedBy(1)
+        var substring = newAlpha[range]
+        newMessage += substring
+
+    case "c":
+        var range = newAlpha.startIndex.advancedBy(2)...newAlpha.startIndex.advancedBy(2)
+        var substring = newAlpha[range]
+        newMessage += substring
+
+    case "d":
+        var range = newAlpha.startIndex.advancedBy(3)...newAlpha.startIndex.advancedBy(3)
+        var substring = newAlpha[range]
+        newMessage += substring
+
+    case "e":
+        var range = newAlpha.startIndex.advancedBy(4)...newAlpha.startIndex.advancedBy(4)
+        var substring = newAlpha[range]
+        newMessage += substring
+
+    case "f":
+        var range = newAlpha.startIndex.advancedBy(5)...newAlpha.startIndex.advancedBy(5)
+        var substring = newAlpha[range]
+        newMessage += substring
+
+    default: var substring = String(i.writeTo(&newMessage))
+    }
+
+}
+
+print(newMessage)
 
 
-
-
-//for i in message.characters {
-//    switch i {
-// case "a":
-        
+    
 //}
 //)
 
