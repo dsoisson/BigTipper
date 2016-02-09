@@ -163,7 +163,7 @@ Try using enumeration
 Try using plain tuples
 */
 
-var letterLists = (
+var letterLists = [
     (loc: 0, alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
     (loc: 1, alphabet: "BCDEFGHIJKLMNOPQRSTUVWXYZA"),
     (loc: 2, alphabet: "CDEFGHIJKLMNOPQRSTUVWXYZAB"),
@@ -190,13 +190,13 @@ var letterLists = (
     (loc: 23, alphabet: "XYZABCDEFGHIJKLMNOPQRSTUVW"),
     (loc: 24, alphabet: "YZABCDEFGHIJKLMNOPQRSTUVWX"),
     (loc: 25, alphabet: "ZABCDEFGHIJKLMNOPQRSTUVWXY")
-)
+]
 
 var message = "abe lincoln"
 var shift = 5
 
 var newKey = (26+shift)%26
-var newAlpha = letterLists.5.alphabet
+var newAlpha = letterLists[newKey].alphabet
 //need to substitute 'newKey' in 'newAlpha' to find the 'newKey'th
 
 var newMessage = ""
@@ -318,7 +318,7 @@ shift = -shift
 newKey = (26+shift)%26
 
 var origmessage = ""
-newAlpha = letterLists.21.alphabet
+newAlpha = letterLists[newKey].alphabet
 
 for i in newMessage.uppercaseString.characters {
     switch i {
