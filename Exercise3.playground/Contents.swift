@@ -163,7 +163,7 @@ Try using enumeration
 Try using plain tuples
 */
 
-var test = (
+var letterLists = (
     (loc: 0, alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
     (loc: 1, alphabet: "BCDEFGHIJKLMNOPQRSTUVWXYZA"),
     (loc: 2, alphabet: "CDEFGHIJKLMNOPQRSTUVWXYZAB"),
@@ -192,40 +192,119 @@ var test = (
     (loc: 25, alphabet: "ZABCDEFGHIJKLMNOPQRSTUVWXY")
 )
 
-var message = "Abe Lincoln"
-var shift = 7
-var newAlpha = test.7.alphabet
+var message = "abe lincoln"
+var shift = 5
+
+var newKey = (26+shift)%26
+var newAlpha = letterLists.5.alphabet
+//need to substitute 'newKey' in 'newAlpha' to find the 'newKey'th
+
 var newMessage = ""
 
-for i in message.lowercaseString.characters {
+for i in message.uppercaseString.characters {
     switch i {
-    case "a":
+    case "A":
         var range = newAlpha.startIndex.advancedBy(0)...newAlpha.startIndex.advancedBy(0)
         var substring = newAlpha[range]
         newMessage += substring
-    
-    case "b":
+    case "B":
         var range = newAlpha.startIndex.advancedBy(1)...newAlpha.startIndex.advancedBy(1)
         var substring = newAlpha[range]
         newMessage += substring
-
-    case "c":
+    case "C":
         var range = newAlpha.startIndex.advancedBy(2)...newAlpha.startIndex.advancedBy(2)
         var substring = newAlpha[range]
         newMessage += substring
-
-    case "d":
+    case "D":
         var range = newAlpha.startIndex.advancedBy(3)...newAlpha.startIndex.advancedBy(3)
         var substring = newAlpha[range]
         newMessage += substring
-
-    case "e":
+    case "E":
         var range = newAlpha.startIndex.advancedBy(4)...newAlpha.startIndex.advancedBy(4)
         var substring = newAlpha[range]
         newMessage += substring
-
-    case "f":
+    case "F":
         var range = newAlpha.startIndex.advancedBy(5)...newAlpha.startIndex.advancedBy(5)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "G":
+        var range = newAlpha.startIndex.advancedBy(6)...newAlpha.startIndex.advancedBy(6)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "H":
+        var range = newAlpha.startIndex.advancedBy(7)...newAlpha.startIndex.advancedBy(7)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "I":
+        var range = newAlpha.startIndex.advancedBy(8)...newAlpha.startIndex.advancedBy(8)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "J":
+        var range = newAlpha.startIndex.advancedBy(9)...newAlpha.startIndex.advancedBy(9)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "K":
+        var range = newAlpha.startIndex.advancedBy(10)...newAlpha.startIndex.advancedBy(10)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "L":
+        var range = newAlpha.startIndex.advancedBy(11)...newAlpha.startIndex.advancedBy(11)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "M":
+        var range = newAlpha.startIndex.advancedBy(12)...newAlpha.startIndex.advancedBy(12)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "N":
+        var range = newAlpha.startIndex.advancedBy(13)...newAlpha.startIndex.advancedBy(13)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "O":
+        var range = newAlpha.startIndex.advancedBy(14)...newAlpha.startIndex.advancedBy(14)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "P":
+        var range = newAlpha.startIndex.advancedBy(15)...newAlpha.startIndex.advancedBy(15)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "Q":
+        var range = newAlpha.startIndex.advancedBy(16)...newAlpha.startIndex.advancedBy(16)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "R":
+        var range = newAlpha.startIndex.advancedBy(17)...newAlpha.startIndex.advancedBy(17)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "S":
+        var range = newAlpha.startIndex.advancedBy(18)...newAlpha.startIndex.advancedBy(18)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "T":
+        var range = newAlpha.startIndex.advancedBy(19)...newAlpha.startIndex.advancedBy(19)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "U":
+        var range = newAlpha.startIndex.advancedBy(20)...newAlpha.startIndex.advancedBy(20)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "V":
+        var range = newAlpha.startIndex.advancedBy(21)...newAlpha.startIndex.advancedBy(21)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "W":
+        var range = newAlpha.startIndex.advancedBy(22)...newAlpha.startIndex.advancedBy(22)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "X":
+        var range = newAlpha.startIndex.advancedBy(23)...newAlpha.startIndex.advancedBy(23)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "Y":
+        var range = newAlpha.startIndex.advancedBy(24)...newAlpha.startIndex.advancedBy(24)
+        var substring = newAlpha[range]
+        newMessage += substring
+    case "Z":
+        var range = newAlpha.startIndex.advancedBy(25)...newAlpha.startIndex.advancedBy(25)
         var substring = newAlpha[range]
         newMessage += substring
 
@@ -235,6 +314,126 @@ for i in message.lowercaseString.characters {
 }
 
 print(newMessage)
+shift = -shift
+newKey = (26+shift)%26
+
+var origmessage = ""
+newAlpha = letterLists.21.alphabet
+
+for i in newMessage.uppercaseString.characters {
+    switch i {
+    case "A":
+        var range = newAlpha.startIndex.advancedBy(0)...newAlpha.startIndex.advancedBy(0)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "B":
+        var range = newAlpha.startIndex.advancedBy(1)...newAlpha.startIndex.advancedBy(1)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "C":
+        var range = newAlpha.startIndex.advancedBy(2)...newAlpha.startIndex.advancedBy(2)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "D":
+        var range = newAlpha.startIndex.advancedBy(3)...newAlpha.startIndex.advancedBy(3)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "E":
+        var range = newAlpha.startIndex.advancedBy(4)...newAlpha.startIndex.advancedBy(4)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "F":
+        var range = newAlpha.startIndex.advancedBy(5)...newAlpha.startIndex.advancedBy(5)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "G":
+        var range = newAlpha.startIndex.advancedBy(6)...newAlpha.startIndex.advancedBy(6)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "H":
+        var range = newAlpha.startIndex.advancedBy(7)...newAlpha.startIndex.advancedBy(7)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "I":
+        var range = newAlpha.startIndex.advancedBy(8)...newAlpha.startIndex.advancedBy(8)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "J":
+        var range = newAlpha.startIndex.advancedBy(9)...newAlpha.startIndex.advancedBy(9)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "K":
+        var range = newAlpha.startIndex.advancedBy(10)...newAlpha.startIndex.advancedBy(10)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "L":
+        var range = newAlpha.startIndex.advancedBy(11)...newAlpha.startIndex.advancedBy(11)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "M":
+        var range = newAlpha.startIndex.advancedBy(12)...newAlpha.startIndex.advancedBy(12)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "N":
+        var range = newAlpha.startIndex.advancedBy(13)...newAlpha.startIndex.advancedBy(13)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "O":
+        var range = newAlpha.startIndex.advancedBy(14)...newAlpha.startIndex.advancedBy(14)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "P":
+        var range = newAlpha.startIndex.advancedBy(15)...newAlpha.startIndex.advancedBy(15)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "Q":
+        var range = newAlpha.startIndex.advancedBy(16)...newAlpha.startIndex.advancedBy(16)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "R":
+        var range = newAlpha.startIndex.advancedBy(17)...newAlpha.startIndex.advancedBy(17)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "S":
+        var range = newAlpha.startIndex.advancedBy(18)...newAlpha.startIndex.advancedBy(18)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "T":
+        var range = newAlpha.startIndex.advancedBy(19)...newAlpha.startIndex.advancedBy(19)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "U":
+        var range = newAlpha.startIndex.advancedBy(20)...newAlpha.startIndex.advancedBy(20)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "V":
+        var range = newAlpha.startIndex.advancedBy(21)...newAlpha.startIndex.advancedBy(21)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "W":
+        var range = newAlpha.startIndex.advancedBy(22)...newAlpha.startIndex.advancedBy(22)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "X":
+        var range = newAlpha.startIndex.advancedBy(23)...newAlpha.startIndex.advancedBy(23)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "Y":
+        var range = newAlpha.startIndex.advancedBy(24)...newAlpha.startIndex.advancedBy(24)
+        var substring = newAlpha[range]
+        origmessage += substring
+    case "Z":
+        var range = newAlpha.startIndex.advancedBy(25)...newAlpha.startIndex.advancedBy(25)
+        var substring = newAlpha[range]
+        origmessage += substring
+        
+    default: var substring = String(i.writeTo(&origmessage))
+    }
+    
+}
+
+print(origmessage)
+
 
 
     
@@ -243,15 +442,15 @@ print(newMessage)
 
 
 
-if test.0.loc == Int(shift) {
-    print("worked")
-}
+//if test.0.loc == Int(shift) {
+//    print("worked")
+//}
 
 
-print(shift)
-var secretMessage = ""
-var newKey = test.0
-print(newKey)
+//print(shift)
+//var secretMessage = ""
+//var newKey = test.0
+//print(newKey)
 
 //var foo: (x: Int) = 42
 //println(foo.x)
