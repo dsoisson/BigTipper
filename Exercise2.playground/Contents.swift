@@ -35,8 +35,4 @@ let student1 = someString[someString.startIndex.advancedBy(43)...someString.star
 let student2 = someString[someString.startIndex.advancedBy(49)...someString.startIndex.advancedBy(54)]
 print("\(student1) and \(student2) are in the class.")
 
-//use nested tuples instead
 
-var students1 = (
-    (firstname: "Duane", lastname: "Soisson")
-)
