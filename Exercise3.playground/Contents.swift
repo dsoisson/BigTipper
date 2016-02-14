@@ -22,146 +22,6 @@ D_n(x) = (x - n) \mod {26}.
 
 import Foundation
 
-/*: 
-*Try using nested tuples
-*/
-
-
-//var alphabet = (
-//    (letter: "a", number: 0),
-//    (letter: "b", number: 1),
-//    (letter: "c", number: 2),
-//    (letter: "d", number: 3))
-
-//var test = ("a", "b", "c", "d")
-
-/*: 
-Try using enumeration
-*/
-
-//enum Alphabet: Int {
-//    case A = 0, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
-//}
-
-//var message = "Abe Lincoln"
-//var shift = 13
-//var secretMessage = ""
-
-
-//for i in message.lowercaseString.characters {
-//    switch i {
-//    case "a":
-//            var secretLetter = (Alphabet(rawValue: (Alphabet.A.rawValue + shift)%26))
-//            print(secretLetter!)
-//        
-//    case "b":
-//            var secretLetter = (Alphabet(rawValue: (Alphabet.B.rawValue + shift)%26))
-//            print(secretLetter!)
-//        
-//    case "c":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.C.rawValue + shift)%26))
-//        print(secretLetter!)
-//        
-//    case "d":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.D.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "e":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.E.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "f":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.F.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "g":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.G.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "h":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.H.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "i":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.I.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "j":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.J.rawValue + shift)%26))
-//        print(secretLetter!)
-//    
-//    case "k":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.K.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "l":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.L.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "m":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.M.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "n":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.N.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "o":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.O.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "p":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.P.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "q":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.Q.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "r":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.R.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "s":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.S.rawValue + shift)%26))
-//        print(secretLetter!)
-//        
-//    case "t":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.T.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "u":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.U.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "v":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.V.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "w":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.W.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "x":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.X.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "y":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.Y.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    case "z":
-//        var secretLetter = (Alphabet(rawValue: (Alphabet.Z.rawValue + shift)%26))
-//        print(secretLetter!)
-//
-//    default: print(i)
-//    }
-//}
-//
-
-/*:
-Try using plain tuples
-*/
 
 var letterLists = [
     (loc: 0, alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
@@ -193,9 +53,9 @@ var letterLists = [
 ]
 
 var message = "abe lincoln"
-var shift = 5
+var shift = 35
 
-var newKey = (26+shift)%26
+var newKey = shift%26
 var newAlpha = letterLists[newKey].alphabet
 //need to substitute 'newKey' in 'newAlpha' to find the 'newKey'th
 
@@ -314,8 +174,8 @@ for i in message.uppercaseString.characters {
 }
 
 print(newMessage)
-shift = -shift
-newKey = (26+shift)%26
+//shift = -shift
+newKey = 26 - (shift%26)
 
 var origmessage = ""
 newAlpha = letterLists[newKey].alphabet
@@ -434,44 +294,66 @@ for i in newMessage.uppercaseString.characters {
 
 print(origmessage)
 
+/*:
+Try using sample from Matt Sheets
+*/
+let alphaLower = "abcdefghijklmnopqrstuvwxyz"  //using only 1 alphabet string for entire program both encryption and decryption
+let alphaUpper = alphaLower.uppercaseString  //converting lower case to uppercase string to be used when a capital letter is detected
+let alphaLowerCount = alphaLower.characters.count  //count of the alphabet helpful in determining key
+let alphaUpperCount = alphaUpper.characters.count
 
-
+let input = "Nearly all men can stand adversity, but if you want to test a man's character, give him power."  //the message to be encrypted
+var shiftValue = 191 //the value used in the cipher
+var encrypted = ""  //establish an empty string variable to hold the value of the encryption
+var decrypted = ""  //establish an empty string variable to hold the value of the decryption
+var encrypting = true
+repeat {  //set up a loop to fill both the encrpyted and decrypted variables
+    let text = encrypting ? input : encrypted //establish new string constant. if encrypting is true set it to the input variable else set it to the encrypted value
+    for character in text.characters { //loop through all the characters in the text variable
+        let string = String(character) //assign the character as a string
+        
+        let alpha: String //establish a new string constant to hold a lowercase or uppercase letter
+        let alphaCount: Int //establish a new integer constant to hold...
+        if alphaLower.containsString(string) { //compare the variable 'string' (representing the current letter in the message to be encrypted) to the lowercase alphabet string.  If there is a match, then the letter in the message is lowercase, otherwise it is uppercase. Use the corresponding lowercase alphabet, uppercase alphabet.
+            alpha = alphaLower
+        } else if alphaUpper.containsString(string) {
+            alpha = alphaUpper
+        } else { //spaces, punctuation
+            encrypting ? encrypted.appendContentsOf(string) : decrypted.appendContentsOf(string) //add the space or punctuation to the encrypting or decrypting string
+            continue
+        }
+        alphaCount = alpha.characters.count //count how many characters are in the alphabet string
+        
+        let found = alpha.rangeOfString(string)! //with spaces and punctuation, this is an optional and needs unwrapped with the !  Establishing the where in the alpha string the letter is located
+        let distance: Int //establishing a integer constant to hold the distance along the string
+        var advancedBy: Int //establishing an integer variable to hold the distance to move
+        if encrypting { //
+            print(found.startIndex)
+            print(alpha.endIndex)
+            print(found.startIndex.distanceTo(alpha.endIndex))
+            distance = alphaCount - found.startIndex.distanceTo(alpha.endIndex) //why not just use found.startIndex here?
+            print(distance)
+            advancedBy = (distance + shiftValue) % alphaCount //mod (%) allows "wrapping" around the alphabet
+        } else { //for decrypting
+            distance = alpha.startIndex.distanceTo(found.startIndex) //why not just use found.startIndex here? 
+            print(found.startIndex)
+            print(distance)
+            advancedBy = (distance - shiftValue) % alphaCount //this results in a negative value for all letters but A
+            if advancedBy < 0 { //account for negative values by 
+                advancedBy = alphaCount - -advancedBy //how is this subtracting a negative number working? for the first letter 'n' with an 'advancedBy' value of -13, according to this formula 26 - (-13) = 39, not 13.
+                print(advancedBy)
+            }
+        }
+        
+        let append = alpha.substringWithRange(alpha.startIndex.advancedBy(advancedBy)..<alpha.startIndex.advancedBy(advancedBy + 1)) //establish a string constant consisting of one letter from the lowercase or uppercase alphabet established by the advanced by
+        encrypting ? encrypted.appendContentsOf(append) : decrypted.appendContentsOf(append) //if encrypting is true then add the append string (single letter) to the string variable 'encrypted', otherwise add it to the string variable "decrypted".
+    }
     
-//}
-//)
+    encrypting = !encrypting //after all characters in for characters in text.characters have been analyzed and appended to the encrypted string, the program exits the loop and switches to decrypting by make encrypting false. At this point, 'decrypted' is still empty, so the while loop continues. 
+} while decrypted.isEmpty 
+
+print("Decrypted: \(decrypted)")
+print("Encrypted: \(encrypted)")
 
 
 
-//if test.0.loc == Int(shift) {
-//    print("worked")
-//}
-
-
-//print(shift)
-//var secretMessage = ""
-//var newKey = test.0
-//print(newKey)
-
-//var foo: (x: Int) = 42
-//println(foo.x)
-
-
-
-
-
-//var a = 0
-//var b = 1
-//var c = 2
-//var d = 3
-
-//var message = "abc is cba"
-//var shift = 2
-//var message2:Int=()
-
-//for i in message.characters {
-//   switch i {
-//    case "a": message2 = "a"
-//    default: print("")
-//    }
-//    print(message2)
-//}
