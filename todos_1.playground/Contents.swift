@@ -3,7 +3,7 @@
 import UIKit
 import Foundation
 
-var todos = (
+let todos = (
     (id: 1, title: "mow grass", date: "06-15-16", desc: "the front yard is too long and needs mowed.", assigned: (first: "Duane", last: "Soisson")),
     (id: 2, title: "change oil", date: "06-16-16", desc: "3 months has passed since last oil change in Mazda.", assigned: (first: "Duane", last: "Soisson")),
     (id: 3, title: "vacuum floors", date: "02-21-16", desc: "the upstairs carpet needs weekly vacuuming.", assigned: (first: "Sophia", last: "Soisson")),
@@ -16,28 +16,20 @@ Print all of your todos (small description)
 */
 // need nested for loops for each nested tuple
 
-let todosMirror = Mirror(reflecting: todos)
+print("Print all your todos (small description)")
+//iterate over the tuple to print out all of the small descriptions.  Iteration must be done through use of Reflect
 
-for case let (label?, record) in todosMirror.children {
-    
-    print(label)
-    
-    let recordMirror = Mirror(reflecting: record)
-    for case let (label?, tuple) in recordMirror.children {
-        
-        let tupleMirror = Mirror(reflecting: tuple)
-        if tupleMirror.children.count > 0 {
-            
-            for case let (label?, value) in tupleMirror.children {
-                
-                print("\(value)")
-            }
-        } else {
-            print("\t\(tuple)")
+var todosMirror = Mirror(reflecting: todos)
+for case let (label?, todo) in todosMirror.children {
+    let todoMirror = Mirror(reflecting: todo)
+    for case let (label?, value) in todoMirror.children {
+        if label == ".1" {//this is the title
+            print("\t\(value)")
         }
     }
 }
 
+print("")
 /*: 
 Print a single todo
 */
@@ -50,8 +42,6 @@ Add a todo
 /*:
 Update a todo
 */
-todos.0.assigned.first = "Maria"
-print("Now \(todos.0.assigned.first) has to \(todos.0.title)")
 
 /*: 
 Delete a todo
