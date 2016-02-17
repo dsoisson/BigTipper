@@ -36,30 +36,84 @@ var spaceAvailable = true
 //each class has room for 5 students; 3 students get to take 2 classes
 //create loop to assign student1 to math, student2 to science, student3 to english, student4 to history, student5 to math, until all classes have 5 students and no class has duplicate students
 
-repeat {while spaceAvailable{
-for i in students {
-    switch i {
-    case _ where mathClass.count < classSize:
-        mathClass.insert(i)
-    case _ where scienceClass.count < classSize:
-        scienceClass.insert(i)
-    case _ where englishClass.count < classSize:
-        englishClass.insert(i)
-    case _ where historyClass.count < classSize:
-        historyClass.insert(i)
-    default: break
-    }
-}
-    spaceAvailable = !spaceAvailable
-    
-} 
 
+repeat{ 
+    for i in students {
+        switch i {
+        case _ where mathClass.count < classSize:
+            //mathClass.contains(i) ? mathClass.insert("true") : mathClass.insert("false")
+            mathClass.insert(i)
+        case _ where scienceClass.count < classSize:
+            scienceClass.insert(i)
+        case _ where englishClass.count < classSize:
+            englishClass.insert(i)
+        case _ where historyClass.count < classSize:
+            historyClass.insert(i)
+        default: spaceAvailable = !spaceAvailable
+        }
+    }    
+}
+while spaceAvailable
+
+
+
+print(students)
 print(mathClass)
 print(scienceClass)
 print(englishClass)
 print(historyClass)
 
 //create loop to print rosters of each class
+
+let mathIntersectHistory = mathClass.intersect(historyClass)
+let mathIntersectScience = mathClass.intersect(scienceClass)
+let mathIntersectEnglish = mathClass.intersect(englishClass)
+
+let mathExclusiveOrHistory = mathClass.exclusiveOr(historyClass)
+let mathExclusiveOrScience = mathClass.exclusiveOr(scienceClass)
+let mathExclusiveOrEnglish = mathClass.exclusiveOr(englishClass)
+
+let mathUnionHistory = mathClass.union(historyClass)
+let mathUnionScience = mathClass.union(scienceClass)
+let mathUnionEnglish = mathClass.union(englishClass)
+
+let mathSubtractHistory = mathClass.subtract(historyClass)
+let mathSubtractScience = mathClass.subtract(scienceClass)
+let mathSubtractEnglish = mathClass.subtract(englishClass)
+
+mathClass == scienceClass
+mathClass == englishClass
+mathClass == historyClass
+mathClass.intersect(historyClass) == scienceClass.intersect(historyClass)
+
+mathClass.isSubsetOf(historyClass)
+mathClass.isSubsetOf(scienceClass)
+mathClass.isSubsetOf(englishClass)
+
+mathClass.isStrictSubsetOf(historyClass)
+mathClass.isStrictSubsetOf(scienceClass)
+mathClass.isStrictSubsetOf(englishClass)
+
+mathClass.isStrictSupersetOf(historyClass)
+mathClass.isStrictSupersetOf(scienceClass)
+mathClass.isStrictSupersetOf(englishClass)
+
+mathClass.isSupersetOf(historyClass)
+mathClass.isSupersetOf(scienceClass)
+mathClass.isSupersetOf(englishClass)
+
+mathClass.isDisjointWith(historyClass)
+mathClass.isDisjointWith(scienceClass)
+mathClass.isDisjointWith(englishClass)
+
+
+
+
+
+
+
+
+
 
 
 
