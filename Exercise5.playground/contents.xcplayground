@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios'>
+    <pages>
+        <page name='Table'/>
+        <page name='Ex_1_Refactor'/>
+        <page name='Ex_2_Refactor'/>
+        <page name='Ex_3_Refactor'/>
+        <page name='Ex_4_Refactor'/>
+    </pages>
+</playground>
