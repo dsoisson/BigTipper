@@ -16,32 +16,23 @@ import Foundation
 
 var students = [["Matthew", "Sheets", "swift.dude@gmail.com"],["Annie", "Sheets", "annie@email.com"], ["Sam", "Sheets", "sam@email.com"], ["Jack", "Sheets", "jack@email.com"],["Hudson", "Sheets", "hudson@email.com"], ["Oliver", "Sheets", "oliver@email.com"]]
 
-print("My name is", students[0][0], students[0][1],", my email is", students[0][2])
-print("Other students in my class are", students[1][0], students[2][0], students[3][0], students[4][0], "and",students[5][0],".")
+print(intro(students))
+
+print(otherStudents(students))
+
 
 var studentToDrop = "Oliver"
-var studentToAdd = "Carson"
-var index = 0
-var studentFound = false
 
-
-
-for name in students[students.indices]{
-    index += 1
-    if name.first! == studentToDrop {
-        studentFound = !studentFound
-    }
-}
-
-if studentFound {
-    print("\(studentToDrop) was found at Index \(index) in this class and will be dropped.")
-    students.removeAtIndex(index-1)
-} else {
-print("\(studentToDrop) is not in this class and cannot be dropped.")
-}
-
+dropStudent(students, student: studentToDrop)
+students.removeLast()
 students
+var studentToAdd = ["Carson", "Sheets", "carson@email.com"]
 
+students.append(studentToAdd)
+
+let allCapsName = students[5][0].uppercaseString
+//allCapsName![0].uppercaseString
+print("Other students in my class are", students[1][0], students[2][0], students[3][0], students[4][0], "and",allCapsName)
 
 
 //: [Next](@next)
