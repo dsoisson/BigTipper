@@ -24,11 +24,16 @@ print(otherStudents(students))
 var studentToDrop = "Oliver"
 
 dropStudent(students, student: studentToDrop)
+
 students.removeLast()
+
 students
+
 var studentToAdd = ["Carson", "Sheets", "carson@email.com"]
 
+
 students.append(studentToAdd)
+students
 
 let allCapsName = students[5][0].uppercaseString
 //allCapsName![0].uppercaseString

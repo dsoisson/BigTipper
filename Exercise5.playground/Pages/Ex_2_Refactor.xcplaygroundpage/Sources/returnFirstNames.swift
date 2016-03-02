@@ -36,7 +36,6 @@ public func dropStudent(var students: [[String]], student: String) -> (String, [
         index++
         if name.first! == student {
             studentFound = !studentFound
-    
         }
     }
     
@@ -50,3 +49,10 @@ public func dropStudent(var students: [[String]], student: String) -> (String, [
 
     return (notice, students)
 }
+
+//public func addStudent(var students: [[String]], student: [String]) -> [[String]] {
+//    var newArray = [[String]]
+//    students.append(student)
+//    
+////    newArray = students.append(student)
+//}

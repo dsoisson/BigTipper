@@ -22,6 +22,33 @@
 
 import Foundation
 
+var students = getStudents()
+
+var allStudents = getEntireClass(&students)
+var math = getMathStudents(students)
+var mathBoys = getMathBoyStudents(students)
+var mathGirls = getMathGirlStudents(students)
+var science = getScienceStudents(students)
+var english = getEnglishStudents(students)
+var history = getHistoryStudents(students)
+var classes = getSemester([math, science, english, history]) //where are 'math', 'science', 'english' and 'history'?
+
+print("All \(students.count) students")
+for student in students {
+    print("\(student["name"]!)") //where is "name"?
+}
+
+let classNames = classes.keys
+for name in classNames {
+    let _class = classes[name]!
+    
+    print("\(_class.count) \(name) Students")
+    
+    for student in _class {
+        print("\t\(student)")
+    }
+}
+
 
 
 //: [Next](@next)
