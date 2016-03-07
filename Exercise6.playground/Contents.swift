@@ -38,19 +38,30 @@ Use the above functions to query your students.
 * ["Kenobi", "Windu", "Solo", "Bacca"]
 */
 
-
-each(students) { (student, index) -> Void in
+func eachClosureBlah(student: [String:String], index: Int) -> Void {
 
     let first = student["first"]!
     let last = student["last"]!
     
     print("\(first) \(last) is index \(index)")
-} 
+}
+
+each(students, eachClosure: eachClosureBlah)
+
+//each(students) { (student, index) -> Void in
+//
+//    let first = student["first"]!
+//    let last = student["last"]!
+//    
+//    print("\(first) \(last) is index \(index)")
+//}
+
 
 //print all the students first and last name and their index.
 //call the function 'each' and send two arguments:
 //(1) argument array of dictionaries type called 'students'.
 //(2) argument Closure. 
+
 //Are 'student' and 'index' empty variables at this time?  Do they have any values at first?
 //Why does it return 'Void'?
 //In the creation of the string constants 'let first = student["first"], where is 'student' coming from? 
@@ -59,7 +70,8 @@ each(students) { (student, index) -> Void in
 //How does the 'index' value increase?
 
 //when calling the function each(<#T##students: [[String : String]]##[[String : String]]#>, closure: <#T##(student: [String : String], index: Int) -> Void#>)
-// Why can we drop the parameter names when calling the function (e.g., 'students' and 'closure'?) 
+
+// Why can we drop the parameter names when calling the function (e.g., 'students' and 'closure'?)
     //We can drop 'students' because it is the first parameter and Swift considers it extraneous
     //'closure' is dropped because it is the last argument and becomes a trailing closure.
 
@@ -128,6 +140,7 @@ print("indexOf = \(students[indexOf(students) { $0["last"] == "Sidious" }!]["fir
 //If indexOf is supposed to return the index number, why is it a bool?
 //Why is it not printing "indexOf = Darth"? see below:
 //The index of the student with last name Sidious is 3
+
 var info = "class"
 print("index of = \(students[3][info]!)")
 

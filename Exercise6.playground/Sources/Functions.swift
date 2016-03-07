@@ -1,12 +1,14 @@
 import Foundation
 
-public func iterator(students: [[String:String]], closure: (student: [String:String]) -> Void)  {
+public func iterator(students: [[String:String]], iteratorClosure: (student: [String:String]) -> Void)  {
     
     for var index = 0;
         index < students.count;
         ++index {
         
-        closure(student: students[index])
+        let student = students[index]
+            
+        iteratorClosure(student: student)
             
     }
 }
@@ -18,17 +20,32 @@ public func iterator(students: [[String:String]], closure: (student: [String:Str
 //What is the purpose of the statement at the end "closure(student: students[index])"?
 
 
-public func each(students: [[String:String]], closure: (student: [String:String], index: Int) -> Void) {
+public func each(students: [[String:String]], eachClosure: (student: [String:String], index: Int) -> Void) {
     
     var index = 0;
     
-    iterator(students) { closure(student: $0, index: index++) }
+    func iteratorClosure(student: [String:String]) -> Void {
+        
+        eachClosure(student: student, index: index++)
+    }
+    
+    iterator(students, iteratorClosure: iteratorClosure)
+    
+//    iterator(students) { (student) -> Void in
+//        
+//        eachClosure(student: student, index: index++)
+//    }
+
+//    iterator(students) { closure(student: $0, index: index++) }
+
 }
 //create a function called 'each' with 2 parameters and no return value
 //The first parameter is called 'students' and has an Array of Dictionaries type.  The name 'students' is independent of the array also called 'students'.
 //The second parameter is called 'closure' and is a Closure Type. The Closure Type accepts 2 parameters of Dictionary and Int and returns nothing (void)
 //The statements create a variable Int called index, calls the function "iterator" using the 2 parameters in 'each' as the arguments.  'students'(array of dictionaries) and the trailing Closure called 'closure'. 
+
 //The parameter 'student' uses the first String denoted as $0? Is there an actual value associated with this?
+
 //The parameter 'index' uses index++.  How is this working?  How can index be increased in value at this time? Is there an actual value associated with this?
 
 
@@ -72,6 +89,7 @@ public func all(students: [[String:String]], closure: (student: [String:String])
 //function all has 2 parameters ('students' and 'closure') of type Array of Dictionaries and of type Closure and returns a Bool.
 //The type Closure has 1 parameter ('student') and returns a Bool
 //The statements initialize a bool variable 'all' to true.
+
 //then calls function 'iterator' with the Array of Dictionaries 'students' as the argument. For each student in students, check 'if all && !closure(student: student)'  --> how does this work?
 
 
