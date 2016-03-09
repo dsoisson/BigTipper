@@ -133,34 +133,40 @@ hardware = "iPhone 8,1"
 osVersion = 5
 
 //get a device with a model name
-switch modelName {
-case ModelName.i.rawValue:
-    device = ("iPhone")
-case ModelName.i3g.rawValue:
-    device = ("iPhone 3G")
-case ModelName.i3gs.rawValue:
-    device = ("iPhone 3Gs")
-case ModelName.i4.rawValue:
-    device = ("iPhone 4")
-case ModelName.i4s.rawValue:
-    device = ("iPhone 4s")
-case ModelName.i5.rawValue:
-    device = ("iPhone 5")
-case ModelName.i5c.rawValue:
-    device = ("iPhone 5c")
-case ModelName.i5s.rawValue:
-    device = ("iPhone 5s")
-case ModelName.i6.rawValue:
-    device = ("iPhone 6")
-case ModelName.i6p.rawValue:
-    device = ("iPhone 6 Plus")
-case ModelName.i6s.rawValue:
-    device = ("iPhone 6s")
-case ModelName.i6sp.rawValue:
-    device = ("iPhone 6s Plus")
+func getDeviceWithModelName (test5: String) -> String {
+    switch test5 {
+    case ModelName.i.rawValue:
+        device = ("iPhone")
+    case ModelName.i3g.rawValue:
+        device = ("iPhone 3G")
+    case ModelName.i3gs.rawValue:
+        device = ("iPhone 3Gs")
+    case ModelName.i4.rawValue:
+        device = ("iPhone 4")
+    case ModelName.i4s.rawValue:
+        device = ("iPhone 4s")
+    case ModelName.i5.rawValue:
+        device = ("iPhone 5")
+    case ModelName.i5c.rawValue:
+        device = ("iPhone 5c")
+    case ModelName.i5s.rawValue:
+        device = ("iPhone 5s")
+    case ModelName.i6.rawValue:
+        device = ("iPhone 6")
+    case ModelName.i6p.rawValue:
+        device = ("iPhone 6 Plus")
+    case ModelName.i6s.rawValue:
+        device = ("iPhone 6s")
+    case ModelName.i6sp.rawValue:
+        device = ("iPhone 6s Plus")
     
-default: device = ("There is no such Model Number.")
+    default: device = ("There is no such Model Number.")
+    
+    return device
+    }
 }
+
+getDeviceWithModelName(modelName)
 
 //get device with a model number
 switch modelNumber {
