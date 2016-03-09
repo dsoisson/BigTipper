@@ -23,21 +23,21 @@ var encoded = ""
 var decoded = ""
 var isEncoding = true
 
-func decode(message: String, shiftValue: Int) {
-    //determine position number of encoded character
-    
-    for i in alpha.characters.count {
-        print(i);
-    }
-}
-
-
-func encode(message: String, shiftValue: Int) {
-    //
-}
-
-decode(message, shiftValue: shift)
-
-
+//func decode(message: String, shiftValue: Int) {
+//    //determine position number of encoded character
+//    
+//    for i in alpha.characters.count {
+//        print(i);
+//    }
+//}
+//
+//
+//func encode(message: String, shiftValue: Int) {
+//    //
+//}
+//
+//decode(message, shiftValue: shift)
+//
+//
 
 //: [Next](@next)
