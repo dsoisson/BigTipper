@@ -16,28 +16,89 @@ import Foundation
 
 let alpha = "abcdefghijklmnopqrstuvwxyz"
 let alphaCaps = alpha.uppercaseString
-
-var message = "This that and the other."
-var shift = 8
+var alphaBet = ""
+var letterAdd = ""
+var message = "Nearly all men can stand adversity."
+var shift = 7
+var newPosition = 0
 var encoded = ""
 var decoded = ""
-var isEncoding = true
+var encoding = true
 
-//func decode(message: String, shiftValue: Int) {
-//    //determine position number of encoded character
-//    
-//    for i in alpha.characters.count {
-//        print(i);
-//    }
-//}
-//
-//
-//func encode(message: String, shiftValue: Int) {
-//    //
-//}
-//
-//decode(message, shiftValue: shift)
-//
-//
+//created loop to check each character in the message against the alphabet string, either lowercase or uppercase
+for character in message.characters {
+    
+    //convert character to a string
+    var newLetter = String(character)
+    
+    //determine if string letter is lowercase or uppercase or a space/punctuation and assign the appropriate alphabet
+    switch newLetter {
+    case _ where alpha.containsString(newLetter):
+        alphaBet = alpha
+    //alphaBet.rangeOfString(newLetter)!
+    case _ where alphaCaps.containsString(newLetter):
+        alphaBet = alphaCaps
+    default: encoded.append(character)
+    }
+    
+    //iterate through the alphabet, determine the position of the letter, change the position based on the shift value
+    //append the letter to the encoded string
+    
+    for (var list, letter) in alphaBet.characters.enumerate() {
+       
+        if character == letter {
+            newPosition = (list+shift)%26
+
+            letterAdd = alphaBet.substringWithRange(alphaBet.startIndex.advancedBy(newPosition)..<alphaBet.startIndex.advancedBy(newPosition+1))
+        
+            encoded.appendContentsOf(letterAdd)
+        
+       
+        }
+    }
+}
+
+print(encoded)
+message = encoded
+
+for character in message.characters {
+    
+    //convert character to a string
+    var newLetter = String(character)
+    
+    //determine if string letter is lowercase or uppercase or a space/punctuation and assign the appropriate alphabet
+    switch newLetter {
+    case _ where alpha.containsString(newLetter):
+        alphaBet = alpha
+        //alphaBet.rangeOfString(newLetter)!
+    case _ where alphaCaps.containsString(newLetter):
+        alphaBet = alphaCaps
+    default: decoded.append(character)
+    }
+    
+    //iterate through the alphabet, determine the position of the letter, change the position based on the shift value
+    //append the letter to the encoded string
+    
+    for (var list, letter) in alphaBet.characters.enumerate() {
+        
+        if character == letter {
+            if list-shift < 0 {
+                newPosition = 26+((list-shift)%26)
+            } else {
+                newPosition = (list-shift)%26
+            }
+        
+            letterAdd = alphaBet.substringWithRange(alphaBet.startIndex.advancedBy(newPosition)..<alphaBet.startIndex.advancedBy(newPosition+1))
+            
+            decoded.appendContentsOf(letterAdd)
+            
+        }
+    }
+}
+
+print(decoded)
+
+
+
 
 //: [Next](@next)

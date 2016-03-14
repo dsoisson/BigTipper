@@ -37,24 +37,30 @@ Use the above functions to query your students.
 * Last names of math and sciense students where age > 25 and age < 80
 * ["Kenobi", "Windu", "Solo", "Bacca"]
 */
-
-func eachClosureBlah(student: [String:String], index: Int) -> Void {
-
-    let first = student["first"]!
-    let last = student["last"]!
-    
-    print("\(first) \(last) is index \(index)")
+for (index, student) in students.enumerate() {
+    let firstName = student["first"]!
+    let lastName = student["last"]!
+    print("The student \(firstName) \(lastName) has an index of \(index)")
 }
 
-each(students, eachClosure: eachClosureBlah)
 
-//each(students) { (student, index) -> Void in
+//func eachClosureBlah(student: [String:String], index: Int) -> Void {
 //
 //    let first = student["first"]!
 //    let last = student["last"]!
 //    
 //    print("\(first) \(last) is index \(index)")
 //}
+//
+//each(students, eachClosure: eachClosureBlah)
+
+each(students) { (student, index) -> Void in
+
+    let first = student["first"]!
+    let last = student["last"]!
+    
+    print("\(first) \(last) is index \(index)")
+}
 
 
 //print all the students first and last name and their index.
@@ -71,9 +77,9 @@ each(students, eachClosure: eachClosureBlah)
 
 //when calling the function each(<#T##students: [[String : String]]##[[String : String]]#>, closure: <#T##(student: [String : String], index: Int) -> Void#>)
 
-// Why can we drop the parameter names when calling the function (e.g., 'students' and 'closure'?)
-    //We can drop 'students' because it is the first parameter and Swift considers it extraneous
-    //'closure' is dropped because it is the last argument and becomes a trailing closure.
+//Q: Why can we drop the parameter names when calling the function (e.g., 'students' and 'closure'?)
+    //A: We can drop 'students' because it is the first parameter and Swift considers it extraneous
+    //A: 'closure' is dropped because it is the last argument and becomes a trailing closure.
 
 each(students) { print("\($0["first"]!) \($0["last"]!) is index \($1)") }
 //$0 represents the first parameter of the closure, 'student' in this case.
@@ -114,6 +120,7 @@ if test {
     print("I'm glad to see there is a star wars character named Duane")
 }
 
+
 all(students){$0["first"] == "Obi-Wan"}
 //returns false because all students first names are not "Obi-Wan"
 
@@ -135,8 +142,10 @@ if test2 {
 }
 
 
+students[2]["first"]
+indexOf(students) {$0["last"]=="Skywalker"}
 
-print("indexOf = \(students[indexOf(students) { $0["last"] == "Sidious" }!]["first"]!)")
+print("indexOf = \(students[indexOf(students) { $0["last"] == "Skywalker" }!]["first"]!)")
 //If indexOf is supposed to return the index number, why is it a bool?
 //Why is it not printing "indexOf = Darth"? see below:
 //The index of the student with last name Sidious is 3

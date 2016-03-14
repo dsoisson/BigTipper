@@ -3,8 +3,8 @@ import Foundation
 public func iterator(students: [[String:String]], iteratorClosure: (student: [String:String]) -> Void)  {
     
     for var index = 0;
-        index < students.count;
-        ++index {
+        index < students.count;  //this is equivalent to if index is less than the number of students in the array then...
+        ++index {  //add 1 to the index count
         
         let student = students[index]
             
@@ -13,8 +13,8 @@ public func iterator(students: [[String:String]], iteratorClosure: (student: [St
     }
 }
 //create a function called iterator with 2 parameters and no return value.
-//1st is named  "students" and has an Array of Dictionary type. Is this why it has the [[ ]]?
-//2nd parameter is named "closure" and has a Closure type. The Closure type accepts a Dictionary and returns nothing. Why doesn't it also have double brackets [[ ]]? It isn't an Array of Dictionaries, just a Dictionary?
+//1st is named  "students" and has an Array of Dictionary type.
+//2nd parameter is named "iteratorclosure" and has a Closure type. The Closure type accepts a Dictionary and returns nothing. Why doesn't it also have double brackets [[ ]]? It isn't an Array of Dictionaries, just one item in a Dictionary.
 //Do the statements for var index = 0; index < students.count; and ++index belong to 'iterator' or 'closure'?
 //the statements create a new variable integer called 'index'. if the index is less than the count of the array of dictionaries then add 1 to the index and repeat. Does students.count count the number of dictionaries in the array or does it count the number of entries in each dictionary? I think it is a count of each dictionary.
 //What is the purpose of the statement at the end "closure(student: students[index])"?
@@ -35,9 +35,9 @@ public func each(students: [[String:String]], eachClosure: (student: [String:Str
 //        
 //        eachClosure(student: student, index: index++)
 //    }
-
+//
 //    iterator(students) { closure(student: $0, index: index++) }
-
+//
 }
 //create a function called 'each' with 2 parameters and no return value
 //The first parameter is called 'students' and has an Array of Dictionaries type.  The name 'students' is independent of the array also called 'students'.

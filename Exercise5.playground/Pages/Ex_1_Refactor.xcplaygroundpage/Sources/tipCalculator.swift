@@ -20,3 +20,4 @@ public func tip(bill: Double, minTip: Double, minTipPerc: Double) -> (tipPercent
     totalBill = bill + tipAmt
     return (tipPercent, tipAmt, totalBill)
 }
+

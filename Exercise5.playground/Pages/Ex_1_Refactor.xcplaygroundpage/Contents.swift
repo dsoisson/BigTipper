@@ -17,9 +17,19 @@ var minTip = 3.00
 var minTipPercent = 20.0
 
 
+
+let formatter = NSNumberFormatter()
+formatter.numberStyle = .CurrencyStyle
+
+
+let totalTip = formatter.stringFromNumber((tip(billAmt, minTip: minTip, minTipPerc: minTipPercent).tipAmt))
+let totalBill = formatter.stringFromNumber((tip(billAmt, minTip: minTip, minTipPerc: minTipPercent).totalBill))
+//let totalTipPerc = formatter.stringFromNumber((tip(billAmt, minTip: minTip, minTipPerc: minTipPercent).tipPercent))
+
+
 print("The tip percentage is \((tip(billAmt, minTip: minTip, minTipPerc: minTipPercent).tipPercent))%")
-print("The tip amount is $\(tip(billAmt, minTip: minTip, minTipPerc: minTipPercent).tipAmt)")
-print("The total bill is $\(tip(billAmt, minTip: minTip, minTipPerc: minTipPercent).totalBill)")
+print("The tip amount is \(totalTip!)")
+print("The total bill is \(totalBill!)")
 
 
 
