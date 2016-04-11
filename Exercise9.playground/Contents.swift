@@ -26,31 +26,27 @@ enum MeowReasons {
 }
 
 
-
 class Owner {
     var name: String = ""
-    var cats: Cat? //owners don't need cats.  This is optional.
+    var cats = [Cat]()
     var dogs = [Dog]()
-    
     init(name: String){
         self.name = name
-        
     }
     
-    
-    
-
-    
-//    subscript(index: Int) -> String {
-//        get {
-//        
-//            return self.dogs![index].name ?? "no dogs"
-//        }
-//        set(newValue) {
-//            self.dogs![index].name = newValue
-//        }
-//    }
-    
+    subscript(index: MeowReasons) -> String{
+        switch index {
+        case .wantsFood:
+            return "Bowl was filled."
+        case .wantsAttention:
+            return "Fur was brushed."
+        case .wantsInside:
+            return "Door opened to let inside."
+        case .wantsOutside:
+            return "Door opened to let outside."
+        }
+        
+    }
     
     deinit{
         print("No more owner.")
@@ -209,6 +205,7 @@ class Cat{
         self.init(breed: "", color: "", name: "")
     }
     
+//    if let owner
     
     var energy: Int = 100 {
         
@@ -285,6 +282,7 @@ class Cat{
     }
 }
 
+
 class Toy {
     var dogToy: Set = [
         "Red Guy", "Rubber Ball", "Chew Bone", "String"
@@ -310,7 +308,7 @@ var activities = [
 var tom = Owner(name: "Tom")
 var man = Owner(name: "Duane")
 
-
+tom[MeowReasons.wantsFood]
 
 /*When an instance of a dog or cat is created, it should be added to the array of Dog or array of Cat in the Owner Class
  */
@@ -323,24 +321,20 @@ myCat.owner = tom //add this instance of cat (myCat) to the array of Cats in the
 myCat.name = "Polly"
 
 print("\(myCat.owner!.name) adopted a cat and named her \(myCat.name)")
-tom.cats = myCat //why is this still nil?
-tom.cats?.name
+tom.cats.append(myCat)
 
+myCat.meow(MeowReasons.wantsFood)
 
 var myDog = Dog(breed: "Dauchsund", color: "Black", name: "Frannie", owner: man)
 var dogTwo = Dog(breed: "Dauchshund", color: "Gray", name: "Kaycee", owner: man)
 
 //using convenience initializer for dog
-var dogThree = Dog(owner: man)
-
-
+//var dogThree = Dog(owner: man)
+//
+//
 //dogThree.breed = "Basset Hound"
 //dogThree.breed
-
-man.dogs
-
-
-//man.dogs?.append(myDog) //why is this still 'nil
+//
 
 
 var catTwo = Cat()

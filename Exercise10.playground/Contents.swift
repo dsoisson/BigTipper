@@ -11,18 +11,24 @@ import Foundation
  - The subclasses need to override the `makeSound()` method and print the appropriate sound
  - The `pets` property needs to store both `Dog` and `Cat` instances
  */
+
+
 enum DogFoes {
-    case cat
-    case squirrel
-    case intruder
+    case Cat, Squirrel, Intruder
+}
+
+enum DogSounds: Int {
+    case Grrr = 1, Bark, Arf
+ }
+
+DogSounds(rawValue: 1)
+
+enum CatSounds: Int {
+    case Meow = 1, Meowt, Purr
 }
 
 enum MeowReasons {
-    case wantsFood
-    case wantsOutside
-    case wantsInside
-    case wantsAttention
-    
+    case wantsFood, wantsOutside, wantsAttention
 }
 
 class Pet {
@@ -34,36 +40,18 @@ class Pet {
     var eating: Bool = false
     var sleeping: Bool = false
     var playing: Bool = false
-
-}
-
-class Owner {
-    var name: String = ""
-    var cats: [Cat]? //owners don't need cats.  This is optional.
-    var dogs: [Dog]? //owners don't need dogs. This is optional.
-    init(name: String){
+    
+    init(breed: String, color: String, name: String){
+        self.breed = breed
+        self.color = color
         self.name = name
     }
     
-//    subscript(index: Int) -> String {
-//        get {
-//        
-//            return self.dogs![index].name ?? "no dogs"
-//        }
-//        set(newValue) {
-//            self.dogs![index].name = newValue
-//        }
-//    }
-    
-    
-    deinit{
-        print("No more owner.")
+    convenience init() {
+        self.init(breed: "", color: "", name: "")
+        
     }
-}
-
-
-class Dog: Pet {
-    var barking: Bool = false
+    
     
     
     var age: Int {//read only computed property using birthday and current date
@@ -75,22 +63,6 @@ class Dog: Pet {
         return DateUtils.yearSpan(birthday!, to: NSDate())
         
     }
-    
-    //all dogs must have owners. using unowned
-    unowned var owner: Owner
-    
-    
-    init(breed: String, color: String, name: String, owner: Owner) {
-        self.breed = breed
-        self.color = color
-        self.name = name
-        self.owner = owner
-    }
-    
-    convenience init(owner: Owner) {
-        self.init(breed: "", color: "", name: "", owner: Owner.init(name: ""))
-    }
-
     
     var energy: Int = 100 {
         
@@ -105,19 +77,11 @@ class Dog: Pet {
                 print("Too tired.  Time to rest.")
             }
         }
+    
     }
     
-    func bark(kind: DogFoes) -> (String, Bool) {
-        barking = true
-        switch kind {
-        case .cat:
-            return ("Bark, Bark, Bark", barking)
-        case .squirrel:
-            return ("arf", barking)
-        case .intruder:
-            return ("grrrr", barking)
-        }
-        
+    func makeSound(index: Int) -> String {
+        return("")
     }
     
     func eat(inout energy: Int) -> String {
@@ -136,12 +100,60 @@ class Dog: Pet {
             return "Feeling stuffed.  Didn't eat."
         }
     }
-    
-    
-    
+
     func sleep() -> String{
         
         return "Very sleepy.  Need to close eyes."
+    }
+
+    
+}
+
+class Owner {
+    var name: String = ""
+    var cats = [Cat]()
+    var dogs = [Dog]()
+    var pets = [Pet]()
+    init(name: String){
+        self.name = name
+    }
+    
+    subscript(index: MeowReasons) -> String{
+        switch index {
+        case .wantsFood:
+            return "Bowl was filled."
+        case .wantsAttention:
+            return "Fur was brushed."
+        case .wantsOutside:
+            return "Door opened to let outside."
+        }
+        
+    }
+    
+    deinit{
+        print("No more owner.")
+    }
+}
+
+
+class Dog: Pet {
+    var barking: Bool = false
+    
+    //all dogs must have owners. using unowned
+    unowned var owner: Owner
+    
+    init(breed: String, color: String, name: String, owner: Owner) {
+        self.owner = owner
+        super.init(breed: breed, color: color, name: name)
+        self.owner.pets.append(self)
+    }
+    
+    convenience init() {
+        self.init(breed: "", color: "", name: "", owner: Owner.init(name: ""))
+    }
+
+    override func makeSound(index: Int) -> String {
+        return ("\(DogSounds(rawValue: index)!)")
     }
     
     func play() -> (String, Int) {
@@ -149,7 +161,6 @@ class Dog: Pet {
         while energy > 10 {
             chase()
             energy -= 5
-            bark(DogFoes.cat)
             energy -= 10
         }
         
@@ -157,10 +168,8 @@ class Dog: Pet {
     }
     
     func chase() -> String{
-        
         return "I'm gonna get that cat!!"
     }
-    
     
     deinit {
         print("no more dog")
@@ -171,85 +180,27 @@ class Cat: Pet{
     var meowing: Bool = false
     //cats don't need owners.  This is optional. using weak
     weak var owner: Owner?
-    
-    
-    
-    var age: Int {//read only computed property using birthday and current date
-        
-        guard birthday != nil && alive else{
-            return 0
-        }
-        
-        return DateUtils.yearSpan(birthday!, to: NSDate())
-        
+
+    init(breed: String, color: String, name: String, owner: Owner) {
+        self.owner = owner
+        super.init(breed: breed, color: color, name: name)
+        self.owner?.pets.append(self)
     }
+
     
-    
-    init(breed: String, color: String, name: String) {
-        self.breed = breed
-        self.color = color
-        self.name = name
-        
-    }
+    override init(breed: String, color: String, name: String) {
+        super.init(breed: breed, color: color, name: name)
+}
     
     convenience init() {
         self.init(breed: "", color: "", name: "")
     }
     
-    var energy: Int = 100 {
-        
-        willSet {
-            print("About to set energy to \(newValue)%")
-        }
-        didSet {
-            print("You had \(oldValue)% energy, now you have \(energy)%")
-            
-            if energy <= 0  {
-                
-                print("Too tired.  Time to rest.")
-            }
-        }
+    
+    override func makeSound(index: Int) -> String {
+        return ("\(CatSounds(rawValue: index)!)")
     }
-    
-    func meow(kind: MeowReasons) -> (String, Bool) {
-        meowing = true
-        switch kind {
-        case .wantsAttention:
-            return ("MEOW!", meowing)
-        case .wantsFood:
-            return ("meow", meowing)
-        case .wantsInside:
-            return ("Meow", meowing)
-        case .wantsOutside:
-            return ("meOWt", meowing)
-        }
-        
-    }
-    
-    func eat(inout energy: Int) -> String {
-        switch energy{
-        case 0..<25:
-            energy = 100
-            return "Really hungry.  Ate the entire can."
-        case 25..<75:
-            energy = 100
-            return "Sort of hungry. Ate half the can."
-        case 75..<100:
-            energy = 100
-            return "Not very hungry. Ate only one bite."
-        default:
-            sleep()
-            return "Feeling stuffed.  Didn't eat."
-        }
-    }
-    
-    
-    
-    func sleep() -> String{
-        
-        return "Very sleepy.  Need to close eyes."
-    }
-    
+
     func play() -> (String, Int) {
         energy = 50
         while energy > 10 {
@@ -261,7 +212,6 @@ class Cat: Pet{
     }
     
     func chase() -> String{
-        
         return "I'm gonna get that dog!!"
     }
     
@@ -270,6 +220,7 @@ class Cat: Pet{
         print("no more cat")
     }
 }
+
 
 class Toy {
     var dogToy: Set = [
@@ -296,41 +247,42 @@ var activities = [
 var tom = Owner(name: "Tom")
 var man = Owner(name: "Duane")
 
+tom[MeowReasons.wantsFood]
 
-
-/*When an instance of a dog or cat is created, it should be added to the array of Dog or array of Cat in the Owner Class
- */
-
-
+//using convenience initializer for cat
 var myCat = Cat()
 myCat.breed = "Hemmingway"
 myCat.color = "Gray"
-myCat.owner = tom
+myCat.owner = man
 myCat.name = "Polly"
 
 print("\(myCat.owner!.name) adopted a cat and named her \(myCat.name)")
-tom.cats?.append(myCat)
+man.pets.append(myCat)
+myCat.makeSound(3)
 
 var myDog = Dog(breed: "Dauchsund", color: "Black", name: "Frannie", owner: man)
 var dogTwo = Dog(breed: "Dauchshund", color: "Gray", name: "Kaycee", owner: man)
-
-var dogThree = Dog(owner: man)
-
-
-dogThree.breed = "Basset Hound"
-
-man.name
-
-man.dogs?.append(myDog) //why is this still 'nil'?
-man.dogs
-
-
-
-
 var catTwo = Cat()
+
+//using convenience initializer for dog
+//var dogThree = Dog()
+//dogThree.breed = "Basset Hound"
+
+
+
+
+
+for name in 0...man.pets.count-1 {
+    print("My pet, \(man.pets[name].name), makes a sound like \(man.pets[name].makeSound(1))")
+    
+}
+
+
+myDog.makeSound(1)
 
 print(" \(myCat.name) has five toes.")
 
+man.pets[0].name
 
 dogTwo.name = "KC"
 dogTwo.breed = "Basset Hound"
@@ -342,6 +294,8 @@ myDog.birthday = DateUtils.createDate(year: 2008, month: 11, day: 18)
 
 print("\(myDog.owner.name) bought a \(myDog.color) \(myDog.breed) named \(myDog.name). She is \(myDog.age) years old.")
 
+
+//print out names and sounds of pets
 
 
 myDog.energy = 50
@@ -358,7 +312,7 @@ print("Energy Level is \(myDog.energy)")
 
 myDog.eat(&myDog.energy)
 print("Energy Level is \(myDog.energy)")
-print(myDog.bark(DogFoes.cat).1)
+//print(myDog.bark(DogFoes.cat).1)
 
 dogTwo.barking
 myDog.barking
