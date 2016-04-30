@@ -260,9 +260,9 @@ print("My cat \(myCat.name!) has five toes.")
 myCat.energy = 90
 
 
-var dogTwo = Dog(breed: "Dauchsund", color: "Gray")
-dogTwo.name = "Kaycee"
-dogTwo.barking = true
+var dogTwo: Dog? = Dog(breed: "Dauchsund", color: "Gray")
+dogTwo!.name = "Kaycee"
+dogTwo!.barking = true
 
 
 var myDog = Dog(breed: "Dauchsund", color: "Black")
@@ -288,13 +288,13 @@ myDog.eat(&myDog.energy)
 print("Energy Level is \(myDog.energy)")
 print(myDog.bark(DogFoes.cat).1)
 
-dogTwo.barking
+dogTwo!.barking
 myDog.barking
 
-if dogTwo.barking {
+if dogTwo!.barking {
 activities[5]
 } else {
-    print("\(dogTwo.name!) is not barking.")
+    print("\(dogTwo!.name!) is not barking.")
 }
 
 
@@ -307,3 +307,6 @@ if myDog.play().1 < 50 {
     var energyLevel = myDog.play().1
     myDog.eat(&energyLevel)
 }
+
+dogTwo = nil
+
