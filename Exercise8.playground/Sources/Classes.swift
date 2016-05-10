@@ -5,6 +5,8 @@ public class Test {
         return "test"
     }
 }
+
+
 public class Dog {
     public var breed: String = ""
     public var color: String = ""
@@ -157,11 +159,11 @@ public class Cat{
         meowing = true
         switch kind {
         case .cat:
-            return ("Bark, Bark, Bark", barking)
+            return ("Bark, Bark, Bark", false)
         case .squirrel:
-            return ("arf", barking)
+            return ("arf", false)
         case .intruder:
-            return ("grrrr", barking)
+            return ("grrrr", false)
         }
         
     }
@@ -195,7 +197,7 @@ public class Cat{
         while energy > 10 {
             chase()
             energy -= 5
-            bark(DogFoes.cat)
+//            bark(DogFoes.cat)
             energy -= 10
         }
         

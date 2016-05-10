@@ -30,7 +30,10 @@ var activities = [
     4: "Chasing",
     5: "Barking"]
 
+
 //DogFoes.cat
+
+let mytest = Tester()
 
 var dogTwo = Dog(breed: "Dauchsund", color: "Gray")
 dogTwo.name = "Kaycee"
