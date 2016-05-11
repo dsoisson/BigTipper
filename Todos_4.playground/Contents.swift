@@ -51,7 +51,7 @@
 
   curl -u dsoisson1:password -H "Accept: application/json" -i http://todo.eastus.cloudapp.azure.com/todo-ios/todos/api/v1.0/todo/0
  
-  curl -u dsoisson1:password -H "Content-Type: application/json" -X POST -d '{"title":"Lunch", "body":"Having lunch", "priority": 3}' -v http://todo.eastus.cloudapp.azure.com/todo-ios/todos/api/v1.0/todo/create
+  curl -u dsoisson1:password -H "Content-Type: application/json" -X POST -d '{"title":"Grade", "body":"Math quiz", "priority": 1}' -v http://todo.eastus.cloudapp.azure.com/todo-ios/todos/api/v1.0/todo/create
  
   curl -u dsoisson1:password -H "Content-Type: application/json" -X PUT -d '{"title":"Dinner", "body":"Having Dinner", "priority": 2}' -i http://todo.eastus.cloudapp.azure.com/todo-ios/todos/api/v1.0/todo/update/0
 
@@ -62,7 +62,7 @@
 import Foundation
 import XCPlayground
  
-var host = "http://dsoisson1:password@todo.eastus.cloudapp.azure.com"
+var host = "http://todo.eastus.cloudapp.azure.com"
 var session = NSURLSession.sharedSession()
 
  
@@ -82,26 +82,42 @@ var session = NSURLSession.sharedSession()
  
  var myTodos = Database<Todo>()
  
+ 
  myTodos.addItem(todo2)
- myTodos.addItem(todo1)
-
+myTodos.count
+ 
+ myTodos[0].body
+ 
 let todosJsonPayload =  myTodos.serialize { (items) -> AnyObject in
  return Array(items).asDictionary
  }
  
  print(todosJsonPayload)
 
- myTodos.deserialize("\(host)/todo-ios/todos/api/v1.0/todos"){ (items) -> AnyObject in
-    return Array(arrayLiteral: items as! Todo).asDictionary
- }
-    
+// myTodos.deserialize("\(host)/todo-ios/todos/api/v1.0/todos"){ (items) -> AnyObject in
+//    return Array(arrayLiteral: items as! Todo).asDictionary
+// }
+
+ myTodos.count
+ myTodos[0].body
  
- //print all todos
-// var todos = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todos")!)
-// todos.HTTPMethod = "GET"
-// todos.addValue("application/json", forHTTPHeaderField: "Content-Type")
+ 
+ 
+ 
+
+let username = "dsoisson1"
+let password = "password"
+ let loginString = NSString(format: "%@:%@", username, password)
+ let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
+ let base64LoginString = loginData.base64EncodedStringWithOptions([])
+ 
+//print all todos
+// var request = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todos")!)
+// request.HTTPMethod = "GET"
+// request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+// request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 // 
-// var taskTodos = session.dataTaskWithRequest(todos){ (data, response, error) -> Void in
+// var task = session.dataTaskWithRequest(request){ (data, response, error) -> Void in
 //    if error != nil {
 //        print(error)
 //    } else {
@@ -116,18 +132,18 @@ let todosJsonPayload =  myTodos.serialize { (items) -> AnyObject in
 // }
 // 
 // }
-// taskTodos.resume()
+// task.resume()
+// 
+// 
 // 
 
-
- 
-//
 ////print a todo
-// var todo = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/0")!)
-// todo.HTTPMethod = "GET"
-// todo.addValue("application/json", forHTTPHeaderField: "Content-Type")
+// var request = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todo/0")!)
+// request.HTTPMethod = "GET"
+//  request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+// request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 // 
-// var taskTodo = session.dataTaskWithRequest(todo){ (data, response, error) -> Void in
+// var task = session.dataTaskWithRequest(request){ (data, response, error) -> Void in
 //    if error != nil {
 //        print(error)
 //    } else {
@@ -142,17 +158,20 @@ let todosJsonPayload =  myTodos.serialize { (items) -> AnyObject in
 //    
 // }
 // }
-// taskTodo.resume()
-// 
+// task.resume()
  
  
+ 
+//create a todo
+//var request = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todo/create")!)
+//request.HTTPMethod = "POST"
+//request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+//request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 //
-// //create a todo
-// var createTodo = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0")!)
-// createTodo.HTTPMethod = "POST"
-// createTodo.addValue("application/json", forHTTPHeaderField: "Content-Type")
 // let jsonPayload = todosJsonPayload
-// var taskCreateTodo = session.dataTaskWithRequest(createTodo){ (data, response, error) -> Void in
+// request.HTTPBody = jsonPayload!.dataUsingEncoding(NSUTF8StringEncoding)
+//
+// var task = session.dataTaskWithRequest(request){ (data, response, error) -> Void in
 //    if error != nil {
 //        print(error)
 //    } else {
@@ -167,62 +186,65 @@ let todosJsonPayload =  myTodos.serialize { (items) -> AnyObject in
 //        
 //    }
 // }
-// taskCreateTodo.resume()
-//
-// 
-//
-// //update a todo
-// var updateTodo = NSMutableURLRequest(URL: NSURL(string: "\(host) /todo-ios/todos/api/v1.0/0")!)
-// updateTodo.HTTPMethod = "PUT"
-// updateTodo.addValue("application/json", forHTTPHeaderField: "Content-Type")
-// 
-// var taskUpdateTodo = session.dataTaskWithRequest(updateTodo){ (data, response, error) -> Void in
-//    if error != nil {
-//        print(error)
-//    } else {
-// let statusCode = (response as? NSHTTPURLResponse)?.statusCode
-// guard statusCode >= 200 && statusCode < 300, let json = data else {
-//    return
-// }
-//
-//        var result = NSString(data: json, encoding: NSASCIIStringEncoding)!
-//        
-//        print(result)
-//        
-//    }
-// }
-// taskUpdateTodo.resume()
-//
-// //delete a todo
-// var deleteTodo = NSMutableURLRequest(URL: NSURL(string: "\(host) /todo-ios/todos/api/v1.0/0")!)
-// deleteTodo.HTTPMethod = "PUT"
-// deleteTodo.addValue("application/json", forHTTPHeaderField: "Content-Type")
-// 
-// var taskDeleteTodo = session.dataTaskWithRequest(deleteTodo){ (data, response, error) -> Void in
-//    if error != nil {
-//        print(error)
-//    } else {
-// let statusCode = (response as? NSHTTPURLResponse)?.statusCode
-// guard statusCode >= 200 && statusCode < 300, let json = data else {
-//    return
-// }
-//
-//        var result = NSString(data: json, encoding: NSASCIIStringEncoding)!
-//        
-//        print(result)
-//        
-//    }
-// }
-// taskDeleteTodo.resume()
-//
-// 
+// task.resume()
+ 
+ 
 
- 
- 
+//update a todo
+// var request = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todo/update/0")!)
+// request.HTTPMethod = "PUT"
+// request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+// request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 // 
+// let jsonPayload = "{\"title\":\"Watch TV\", \"body\":\"Goldbergs\"}"
+// request.HTTPBody = jsonPayload.dataUsingEncoding(NSUTF8StringEncoding)
 //
+// 
+// var task = session.dataTaskWithRequest(request){ (data, response, error) -> Void in
+//    if error != nil {
+//        print(error)
+//    } else {
+// let statusCode = (response as? NSHTTPURLResponse)?.statusCode
+// guard statusCode >= 200 && statusCode < 300, let json = data else {
+//    return
+// }
 //
-// XCPlaygroundPage.currentPage.needsIndefiniteExecution = true
+//        var result = NSString(data: json, encoding: NSASCIIStringEncoding)!
+//        
+//        print(result)
+//        
+//    }
+// }
+// task.resume()
+// 
+ 
+
+//delete a todo
+// var request = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todo/delete/1")!)
+// request.HTTPMethod = "DELETE"
+// request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+// request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+// 
+// var task = session.dataTaskWithRequest(request){ (data, response, error) -> Void in
+//    if error != nil {
+//        print(error)
+//    } else {
+// let statusCode = (response as? NSHTTPURLResponse)?.statusCode
+// guard statusCode >= 200 && statusCode < 300, let json = data else {
+//    return
+// }
 //
-//
+//        var result = NSString(data: json, encoding: NSASCIIStringEncoding)!
+//        
+//        print(result)
+//        
+//    }
+// }
+// task.resume()
+// 
+ 
+
+ XCPlaygroundPage.currentPage.needsIndefiniteExecution = true
+
+
 
