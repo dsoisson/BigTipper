@@ -43,7 +43,7 @@ public class Todo {
 //        return "\tid: \(id ?? "")\n\ttitle: \(title ?? "")"
 //        
 //}
-    var asDictionary: [String:AnyObject] {
+    public var asDictionary: [String:AnyObject] {
         
         var dictionary = [String:AnyObject]()
         

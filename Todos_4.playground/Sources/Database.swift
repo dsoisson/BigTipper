@@ -72,7 +72,7 @@ extension Database {
                             addItem(item)
                         }
                     } else {
-                        print("not a array")
+                        print("not an array")
                     }
                 } else {
                     print("could not deserialize")

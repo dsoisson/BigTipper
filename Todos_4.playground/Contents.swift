@@ -80,36 +80,105 @@ var session = NSURLSession.sharedSession()
  todo2.priority = 2
  todo2.title = "math"
  
- var myTodos = Database<Todo>()
+var myTodos = Database<Todo>()
  
  
- myTodos.addItem(todo2)
+myTodos.addItem(todo2)
 myTodos.count
  
- myTodos[0].body
+myTodos[0].body
  
-let todosJsonPayload =  myTodos.serialize { (items) -> AnyObject in
- return Array(items).asDictionary
- }
+//let todosJsonPayload =  myTodos.serialize { (items) -> AnyObject in
+// return Array(items).asDictionary
+// }
+
+// public func serialize(convert: (items: Set<Element>) -> AnyObject) -> String? {
+//    do {
+//        let anyObject = convert(items: items)
+//        
+//        let jsonData = try NSJSONSerialization.dataWithJSONObject(anyObject, options: .PrettyPrinted)
+//        
+//        return String(data: jsonData, encoding: NSUTF8StringEncoding)
+//        
+//    } catch let error as NSError {
+//        print(error.localizedDescription)
+//    }
+//    
+//    return nil
+// }
+// }
  
- print(todosJsonPayload)
+ let jsonData = try NSJSONSerialization.dataWithJSONObject(todo2.asDictionary, options: .PrettyPrinted)
+ let jsonString = String(data: jsonData, encoding: NSUTF8StringEncoding)
+ 
+ print(jsonString)
+ 
+ let todosJsonPayload = jsonString
 
 // myTodos.deserialize("\(host)/todo-ios/todos/api/v1.0/todos"){ (items) -> AnyObject in
 //    return Array(arrayLiteral: items as! Todo).asDictionary
 // }
 
- myTodos.count
- myTodos[0].body
+ let test = try FileUtils.getFileContents("\(host)/todo-ios/todos/api/v1.0/todos")
+
  
  
- 
+// public func deserialize<T>(filename: String, closure: (item: AnyObject) -> T) {
+//    
+//    var contents: String?
+//    do {
+//        contents = try FileUtils.getFileContents(filename)
+//    } catch FileError.ReadError(let error) {
+//        print(error)
+//    } catch FileError.NotFound(let path) {
+//        print(path)
+//    } catch let error as NSError {
+//        print(error)
+//    }
+//    
+//    if let payload = contents {
+//        let jsonData = payload.dataUsingEncoding(NSUTF8StringEncoding)!
+//        do {
+//            if let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers) {
+//                
+//                if let arrayOfDictionaries = jsonObject as? [[String:AnyObject]] {
+//                    for dictionary in arrayOfDictionaries {
+//                        
+//                        let item = closure(item: dictionary) as! ItemType
+//                        
+//                        addItem(item)
+//                    }
+//                } else if let array = jsonObject as? [AnyObject] {
+//                    for thing in array {
+//                        
+//                        let item = closure(item: thing) as! ItemType
+//                        
+//                        addItem(item)
+//                    }
+//                } else {
+//                    print("not an array")
+//                }
+//            } else {
+//                print("could not deserialize")
+//            }
+//        } catch let error as NSError {
+//            print(error.localizedDescription)
+//        }
+//    }
+// }
+//
  
 
+ 
+ 
+ 
+ 
+ 
 let username = "dsoisson1"
 let password = "password"
- let loginString = NSString(format: "%@:%@", username, password)
- let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
- let base64LoginString = loginData.base64EncodedStringWithOptions([])
+let loginString = NSString(format: "%@:%@", username, password)
+let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
+let base64LoginString = loginData.base64EncodedStringWithOptions([])
  
 //print all todos
 // var request = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todos")!)
@@ -133,12 +202,9 @@ let password = "password"
 // 
 // }
 // task.resume()
-// 
-// 
-// 
 
 ////print a todo
-// var request = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todo/0")!)
+// var request = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todo/3")!)
 // request.HTTPMethod = "GET"
 //  request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
 // request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -159,7 +225,7 @@ let password = "password"
 // }
 // }
 // task.resume()
- 
+// 
  
  
 //create a todo
@@ -169,14 +235,17 @@ let password = "password"
 //request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 //
 // let jsonPayload = todosJsonPayload
+//     print(jsonPayload)
 // request.HTTPBody = jsonPayload!.dataUsingEncoding(NSUTF8StringEncoding)
 //
 // var task = session.dataTaskWithRequest(request){ (data, response, error) -> Void in
 //    if error != nil {
-//        print(error)
+//        print(error!)
 //    } else {
+//        
 // let statusCode = (response as? NSHTTPURLResponse)?.statusCode
 // guard statusCode >= 200 && statusCode < 300, let json = data else {
+//    
 //    return
 // }
 //
@@ -187,8 +256,7 @@ let password = "password"
 //    }
 // }
 // task.resume()
- 
- 
+// 
 
 //update a todo
 // var request = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todo/update/0")!)
@@ -196,13 +264,12 @@ let password = "password"
 // request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
 // request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 // 
-// let jsonPayload = "{\"title\":\"Watch TV\", \"body\":\"Goldbergs\"}"
-// request.HTTPBody = jsonPayload.dataUsingEncoding(NSUTF8StringEncoding)
+// let jsonPayload = todosJsonPayload
+// request.HTTPBody = jsonPayload!.dataUsingEncoding(NSUTF8StringEncoding)
 //
-// 
 // var task = session.dataTaskWithRequest(request){ (data, response, error) -> Void in
 //    if error != nil {
-//        print(error)
+//        print(error!)
 //    } else {
 // let statusCode = (response as? NSHTTPURLResponse)?.statusCode
 // guard statusCode >= 200 && statusCode < 300, let json = data else {
@@ -216,8 +283,7 @@ let password = "password"
 //    }
 // }
 // task.resume()
-// 
- 
+//
 
 //delete a todo
 // var request = NSMutableURLRequest(URL: NSURL(string: "\(host)/todo-ios/todos/api/v1.0/todo/delete/1")!)
