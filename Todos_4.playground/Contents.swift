@@ -87,8 +87,10 @@ myTodos.addItem(todo2)
 myTodos.count
  
 myTodos[0].body
- 
-//let todosJsonPayload =  myTodos.serialize { (items) -> AnyObject in
+
+todo2.asDictionary
+
+ //let todosJsonPayload =  myTodos.serialize { (items) -> AnyObject in
 // return Array(items).asDictionary
 // }
 
@@ -115,12 +117,26 @@ myTodos[0].body
  
  let todosJsonPayload = jsonString
 
+//http://stackoverflow.com/questions/24310324/deserialize-json-nsdictionary-to-swift-objects
+ 
+ 
 // myTodos.deserialize("\(host)/todo-ios/todos/api/v1.0/todos"){ (items) -> AnyObject in
 //    return Array(arrayLiteral: items as! Todo).asDictionary
 // }
 
  let test = try FileUtils.getFileContents("\(host)/todo-ios/todos/api/v1.0/todos")
+let jtest = test.dataUsingEncoding(NSUTF8StringEncoding)
+ let newTest = try NSJSONSerialization.JSONObjectWithData(jtest!, options: .MutableContainers)
+ 
 
+ 
+ 
+// if let arrayOfDictionaries = newTest as? ([String:AnyObject]) {
+//    for dictionary in arrayOfDictionaries {
+//        let thing = closure(item: dictionary) as! ItemType
+//    }
+// }
+// 
  
  
 // public func deserialize<T>(filename: String, closure: (item: AnyObject) -> T) {
